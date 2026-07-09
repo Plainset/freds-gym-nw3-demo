@@ -428,7 +428,7 @@ section {
   letter-spacing: 0.05em;
 }
 
-/* ---------- Specialism chips ---------- */
+/* ---------- Specialism chips/list ---------- */
 .chip-row {
   display: flex;
   gap: 0.6rem;
@@ -450,6 +450,38 @@ section {
 .on-ink .chip {
   border-color: var(--line-on-ink);
   color: var(--text-on-ink);
+}
+
+.specialism-list {
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.specialism-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 2.55rem;
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: clamp(0.84rem, 1.5vw, 0.96rem);
+}
+
+.specialism-list li::before {
+  content: "";
+  flex: 0 0 0.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--accent-deep);
+}
+
+.specialism-list li:last-child {
+  border-bottom: 0;
 }
 
 /* ---------- Trainer preview / grid ---------- */

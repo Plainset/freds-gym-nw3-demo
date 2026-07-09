@@ -390,6 +390,16 @@ section {
   align-items: start;
 }
 
+/* Grid items default to min-width: auto, so a track holding an unshrinkable
+   flex row (the .chip-row below, whose chips use flex: none) would otherwise
+   be forced to its full unwrapped content width -- ballooning this column
+   and squeezing the other one into a tall, narrow sliver with a large blank
+   area beside/below it. min-width: 0 lets the track honour the 1.1fr/1fr
+   split and lets .chip-row's own overflow-x: auto do the scrolling instead. */
+.intro-grid > div {
+  min-width: 0;
+}
+
 @media (max-width: 820px) {
   .intro-grid { grid-template-columns: 1fr; }
 }
@@ -498,29 +508,21 @@ section {
 
 .on-ink .trainer-role { color: var(--accent); }
 
-.trainer-body details {
+/* Qualifications are always-visible plain content -- no click/toggle
+   required to see them (see AGENTS.md client-feedback fix history). */
+.trainer-quals {
   margin-top: 0.6rem;
   border-top: 1px dashed var(--line);
   padding-top: 0.6rem;
 }
-.on-ink .trainer-body details { border-color: var(--line-on-ink); }
+.on-ink .trainer-quals { border-color: var(--line-on-ink); }
 
-.trainer-body summary {
-  cursor: pointer;
+.quals-label {
   font-weight: 700;
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  list-style: none;
-}
-.trainer-body summary::-webkit-details-marker { display: none; }
-.trainer-body summary::after {
-  content: "+";
-  float: right;
-  font-family: var(--font-display);
-}
-.trainer-body details[open] summary::after {
-  content: "\2212";
+  margin: 0 0 0.3em;
 }
 
 .trainer-body ul {
@@ -531,11 +533,6 @@ section {
 }
 .on-ink .trainer-body ul { color: var(--muted-on-ink); }
 
-/* Dim sibling cards while one card's bio is expanded, via :has() */
-.trainer-grid:has(details[open]) .trainer-card:not(:has(details[open])) {
-  opacity: 0.55;
-  transition: opacity 0.25s ease;
-}
 
 .trainer-preview-strip {
   display: flex;
